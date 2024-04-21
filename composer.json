@@ -1,0 +1,27 @@
+{
+    "name": "wallacemaxters/masker",
+    "description": "String masker similar to Vanilla Masker, but in PHP",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "WallaceMaxters\\Masker\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "wallacemaxters",
+            "email": "wallacemaxters@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php" : "^8.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.1"
+    },
+    "scripts": {
+        "test" : "export XDEBUG_MODE=coverage && vendor/bin/phpunit --coverage-html .coverage/"
+    }
+}
