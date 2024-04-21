@@ -19,6 +19,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Show PHP versson
+      run: php -v
+
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
 
