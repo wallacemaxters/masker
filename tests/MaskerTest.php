@@ -3,6 +3,7 @@
 namespace Tests;
 
 use Exception;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 use WallaceMaxters\Masker\Masker;
@@ -11,19 +12,27 @@ use WallaceMaxters\Masker\UnmaskException;
 
 class MaskerTest extends TestCase
 {
-    public function testMask()
+    #[DataProvider('maskDataProvider')]
+    public function testMask(?string $value, string $expected, string $mask)
     {
         $masker = new Masker();
 
-        foreach ([
-            ['31995451199', '(31) 99545-1199', '(00) 00000-0000'],
+        $this->assertEquals(
+            $expected, 
+            $masker->mask($value, $mask), 
+            "Ao usar o valor $value é esperado que a máscara $mask retorne $expected"
+        );
+    }
+
+    public static function maskDataProvider()
+    {
+        return [
+            ['value' => '31995451199', 'expected' => '(31) 99545-1199', 'mask' => '(00) 00000-0000'],
             ['31995451199', '31995451199', '(00) 000000000000000000000'],
             ['31150150', '31.150-150', '00.000-000'],
-            [null, '', '(00) 0000-0000']
-        ] as [$value, $expected, $mask]) {
-
-            $this->assertEquals($expected, $masker->mask($value, $mask), "Ao usar o valor $value é esperado que a máscara $mask retorne $expected");
-        }
+            'with null' => [null, '', '(00) 0000-0000'],
+            'Peão da Casa' => ['PeãodaCasaPrópria', 'Peão da Casa', 'mask'=> 'AAAA AA AAAA'],
+        ];
     }
 
     public function testUmask()
@@ -76,7 +85,6 @@ class MaskerTest extends TestCase
             enableExceptions: true
         );
 
-      
         try {
             $masker->mask('ABC', 'A-AA-00000');
             throw new Exception('Unexpected');

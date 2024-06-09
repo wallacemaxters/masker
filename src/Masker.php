@@ -21,7 +21,7 @@ class Masker
         $format = $this->convertToInternalFormat($mask);
 
         try {
-            return sprintf($format, ...str_split($value));
+            return sprintf($format, ...$this->split($value));
         } catch (ArgumentCountError) {
 
             if ($this->enableExceptions) {
@@ -54,11 +54,18 @@ class Masker
         return null;
     }
 
-    protected function convertToInternalFormat(string $mask)
+    protected function convertToInternalFormat(string $mask): string
     {
         return strtr($mask, [
             $this->numberPlaceholder    => '%1d', 
             $this->characterPlaceholder => '%1s'
         ]);
+    }
+
+    protected function split(string $value): array
+    {
+        preg_match_all('/./u', $value, $matches);
+
+        return $matches[0] ?? [];
     }
 }
