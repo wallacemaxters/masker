@@ -16,6 +16,8 @@ class Masker
 
     public function mask(?string $value, string $mask): string
     {
+        if ($value === null) return '';
+        
         $format = $this->convertToInternalFormat($mask);
 
         try {
