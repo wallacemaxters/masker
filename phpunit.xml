@@ -4,11 +4,18 @@
          bootstrap="vendor/autoload.php"
          cacheDirectory=".phpunit.cache"
          executionOrder="depends,defects"
-         failOnDeprecation="false"
+         failOnDeprecation="true"
          requireCoverageMetadata="false"
          beStrictAboutCoverageMetadata="true"
          beStrictAboutOutputDuringTests="true"
+         displayDetailsOnTestsThatTriggerDeprecations="true"
          failOnRisky="true"
+         colors="true"
+         stopOnDeprecation="true"
+         stopOnNotice="true"
+         stopOnWarning="true"
+         stopOnError="true"
+         failOnNotice="true"
          failOnWarning="true">
     <testsuites>
         <testsuite name="default">
