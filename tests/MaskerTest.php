@@ -100,9 +100,13 @@ class MaskerTest extends TestCase
             $masker->unmask('A-BC-1234', 'A-AA-0000')
         );
 
-
         $this->assertNull(
             $masker->unmask('ABC', 'A-AA-00000')
+        );
+
+        $this->assertEquals(
+            $masker->unmask('[ABC]_(12345)', '[AAA]_(00000)'),
+            'ABC12345'
         );
     }
 
