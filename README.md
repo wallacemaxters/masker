@@ -1,5 +1,7 @@
 # WallaceMaxters/Masker
 
+![](https://github.com/wallacemaxters/masker/actions/workflows/php.yml/badge.svg)
+
 This library helpers your to format the texts or numbers with simple masks.
 
 Instalation:
